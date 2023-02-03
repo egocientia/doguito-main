@@ -37,7 +37,9 @@
                     </div>
                     <div class="input-container">
                         <input name="senha" id="senha" class="input" type="password" placeholder="Senha"
-                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!=.*[ !@#$%¨&*_=+-]).{6,12}$" required>
+                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%¨&*_=+-]).{6,12}$"
+                            title =" A senha deve conter entre 6 a 12 caracateres e deve conter pelo menos uma letra maiscula, uma letra minuscula, um numero e nenhum simbolo."
+                            required>
                         <label class="input-label" for="senha">Senha</label>
                         <span class="input-mensagem-erro">Este campo não está válido</span>
                     </div>
