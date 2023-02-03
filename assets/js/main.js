@@ -4,10 +4,54 @@ export function valida(input) {
     if(validadores[tipoDeInput]){
         validadores[tipoDeInput](input)
     }
+
+    if(input.validity.valid) {
+        input.parentElement.classList.remove ('input-container--invalido')
+        input.parentElement.querySelector('.input-mensagem-erro').innerHTML = ''
+    } else {
+        input.parentElement.classList.add ('input-container--invalido')
+        input.parentElement.querySelector('.input-mensagem-erro').innerHTML = mostraMensagemDeErro (tipoDeInput, input)
+    }
+}
+
+const tiposDeErro = [
+    'valueMissing',
+    'typeMismatch',
+    'patternMismatch',
+    'customError'
+]
+
+const mensagensErro = {
+    nome: {
+        valueMissing: "O campo nome não pode estar vazio"
+    },
+    email: {
+        valueMissing: "O campo email não pode estar vazio",
+        typeMismatch: 'O email digitado não é valido'
+    },
+    senha: {
+        valueMissing: 'O campo de senha não pode estar vazio',
+        patternMismatch: 'A senha deve conter entre 6 a 12 caracateres e deve conter pelo menos uma letra maiscula, uma letra minuscula, um numero e nenhum simbolo.'
+    },
+    dataNascimento: {
+        valueMissing: 'O campo de data de nascimento não pode estar vazio',
+        customError: 'Você deve ter 18 anos para se cadastrar'
+    }
 }
 
 const validadores = {
     dataNascimento:input => validaData(input)
+}
+
+function mostraMensagemDeErro(tipoDeInput, input) {
+    let mensagem = ''
+    tiposDeErro.forEach(erro =>{
+        if(input.validity[erro]){
+            mensagem = mensagensErro[tipoDeInput][erro]
+        }
+    })
+
+    return mensagem
 }
 
 function validaData (input) {
